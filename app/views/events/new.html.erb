@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>New Event</h2>
+      <%= form_for [@user, @event], url: {controller: "events", action: "create"} do |f| %>
+        <!-- Errors on description ? -->
+        <% if @event.errors.include?(:description) %>
+          <div class="input-group has-error">
+        <% else %>
+          <div class="input-group">
+        <% end %>
+          <%= f.label("Description") %>
+          <%= f.text_field :description, :class => "form-control"  %><p class="text-danger"><%= @event.errors.full_messages_for(:description).first %></p>
+        </div><br />
+        <!-- Errors on date ? -->
+        <% if @event.errors.include?(:date) %>
+          <div class="input-group has-error">
+        <% else %>
+          <div class="input-group">
+        <% end %>
+          <%= f.label("Date") %>
+          <%= f.date_field :date, :class => "form-control"  %><p class="text-danger"><%= @event.errors.full_messages_for(:date).first %></p>
+        </div><br />
+        <%= f.submit "Create Event", class: "btn btn-large btn-primary" %>
+      <% end %><br />
+    <%= link_to 'Back', user_events_path %>
+  </div>
+</div>

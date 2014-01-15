@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Can't Wait!</title>
+
+    <!-- Bootstrap core CSS -->
+    <!--<link href="../../dist/css/bootstrap.css" rel="stylesheet">-->
+    <%= stylesheet_link_tag    "bootstrap", media: "all", "data-turbolinks-track" => true %>
+
+    <!-- Custom styles for this template -->
+    <!--<link href="jumbotron.css" rel="stylesheet">-->
+    <%= stylesheet_link_tag    "jumbotron", media: "all", "data-turbolinks-track" => true %>
+
+    <%= stylesheet_link_tag    "bootstrap.angeline", media: "all", "data-turbolinks-track" => true %>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand">Can't Wait!</span>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li <%= active('Home') %>><%= link_to "Home", root_url %></li>
+            <li <%= active('About') %>><%= link_to "About", about_path %></li>
+            <!--<li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>-->
+          </ul>
+          <% if !signed_in? %>
+            <div class="navbar-form pull-right">
+              <span class="btn btn-success"><%= link_to 'Sign In', "/signin", :class => "navbar-session" %></span>
+            </div>
+          <% else %>
+            <!--<%= form_for(:session, url: sessions_path, html: {class: "navbar-form pull-right", method: "delete"}) do |f| %>-->
+              <div class="navbar-form pull-right">
+                <span class="navbar-welcome">Welcome, <%= current_user.username %>!  <%= link_to '<span class="glyphicon glyphicon-edit "></span>'.html_safe, show_user_path   %></span>
+                <span class="btn btn-success"><%= link_to 'Sign Out', "/signout", :method => :delete, :class => "navbar-session" %></span>
+            </div>
+        <!--<form class="navbar-form pull-right" action="/signout" method="delete">
+          <span class="navbar-welcome">Welcome, <%= current_user.username %>!</span>
+          <button type="submit" class="btn btn-success">Sign Out</button>
+        <% end %>-->
+        <!--<%= link_to 'Sign Out', "/signout", :method => :delete %>-->
+          <% end %>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+  <%= yield %>
+
+    <div class="container">
+      <hr>
+      <footer>
+        <p>&copy; Can't Wait! 2013</p>
+      </footer>
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--<script src="../../assets/js/jquery.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>-->
+    <%= javascript_include_tag "jquery-2.0.3", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "bootstrap.min", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<h2>Sign In Form</h2>
+			<% flash.each do |key, value| %>
+				<p class="text-danger"><%= value %></p>
+			<% end %>
+			<%= form_for(:session, url: sessions_path) do |f| %>
+				<div class="input-group">
+				  <%= f.label :username %>
+			      <%= f.text_field :username, :class => "form-control"  %>
+			    </div><br />
+			    <div class="input-group">
+			      <%= f.label :password %>
+			      <%= f.password_field :password, :class => "form-control"  %>
+			    </div><br />
+			    <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+			<% end %><br />
+			<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+		</div>
+	</div>
+</div>

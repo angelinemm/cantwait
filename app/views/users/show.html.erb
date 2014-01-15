@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<h2> User <%= @current_user.username %></h2>
+			<p>
+				Email: <%= @current_user.email %><br />
+				Subscribed on: <%= @current_user.created_at.to_date.to_formatted_s(:rfc822) %>
+			</p>
+			<p>
+				<%= link_to 'Show events', user_events_path %> |
+				<%= link_to 'Edit', edit_user_path %>
+			</p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,94 @@
+<div class="jumbotron">
+  <div class="container">
+    <h2>Futur events</h2>
+  </div>
+</div>
+
+<!-- If no futur events -->
+<% if @events.futur.size == 0 %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <p>No Futur Events</p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<!-- List futur events -->
+<div class="container">
+<% i=1 %>
+  <% @events.futur.each do |event| %>
+    <% if i==1 %>
+      <div class="row"> 
+    <% end %> 
+    <div class="col-md-4">
+      <h2><%= pluralize((event.date.to_date - DateTime.now.to_date).to_i, "day") %></h2>
+      <p>to <%= event.description %> !</p>
+      <p>
+        <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_user_event_path(event) %>&nbsp;
+        <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, user_event_path(event), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </p>
+    </div>
+    <% if i==3 %>
+      </div>
+      <% i=1 %>
+    <% else %>
+      <% i=i+1 %>
+    <% end %>
+  <% end %>
+<% if !(i==1) %>
+  </div>
+<% end %>
+  <br />
+  <%= link_to 'New Event', new_user_event_path, :class => "btn btn-primary btn-sm" %>
+</div> 
+<!-- End list futur events -->
+
+<br /><br />
+
+<div class="jumbotron">
+  <div class="container">
+    <h2>Past events</h2>
+  </div>
+</div>
+
+<!-- If no past events -->
+<% if @events.past.size == 0 %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <p>No Past Events</p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<!-- List past events -->
+<div class="container">
+<% i=1 %>
+  <% @events.past.each do |event| %>
+    <% if i==1 %>
+      <div class="row"> 
+    <% end %> 
+    <div class="col-md-4">
+      <h2><%= pluralize((DateTime.now.to_date - event.date.to_date).to_i, "day") %></h2>
+      <p>since <%= event.description %> !</p>
+      <p>
+        <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, user_event_path(event), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </p>
+    </div>
+    <% if i==3 %>
+      </div>
+      <% i=1 %>
+    <% else %>
+      <% i=i+1 %>
+    <% end %>
+  <% end %>
+<% if !(i==1) %>
+  </div>
+<% end %>
+</div> 
+<!-- End list past events -->
+
+<br>

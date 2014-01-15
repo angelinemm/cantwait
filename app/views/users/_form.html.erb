@@ -1,0 +1,53 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-4">
+      <% if @editing == true %>
+        <h2>Editing User</h2>
+      <% else %>
+        <h2>New User</h2>
+      <% end %>
+      <p>
+        <%= form_for @user, url: user_path do |f| %>
+        <!-- Errors on Username ? -->
+        <% if @user.errors.include?(:username) %>
+          <div class="input-group has-error">
+        <% else %>
+          <div class="input-group">
+        <% end %>
+            <%= f.label("Username") %>
+            <%= f.text_field :username, :class => "form-control" %><p class="text-danger"><%= @user.errors.full_messages_for(:username).first %></p>
+          </div><br />
+        <!-- Errors on email ? -->
+        <% if @user.errors.include?(:email) %>
+          <div class="input-group has-error">
+        <% else %>
+          <div class="input-group">
+        <% end %>
+            <%= f.label("Email") %> 
+            <%= f.text_field :email, :class => "form-control" %><p class="text-danger"><%= @user.errors.full_messages_for(:email).first %></p>
+          </div><br />
+        <!-- Errors on pwd ? -->
+        <% if @user.errors.include?(:password) %>
+          <div class="input-group has-error">
+        <% else %>
+          <div class="input-group">
+        <% end %>
+            <%= f.label("Password") %>
+            <%= f.password_field :password, :class => "form-control" %><p class="text-danger"><%= @user.errors.full_messages_for(:password).first %></p>
+          </div><br />
+        <!-- Errors on password_confirmation ? -->
+        <% if @user.errors.include?(:password_confirmation) %>
+          <div class="input-group has-error">
+        <% else %>
+          <div class="input-group">
+        <% end %>
+            <%= f.label("Password confirmation") %>
+            <%= f.password_field :password_confirmation, :class => "form-control" %><p class="text-danger"><%= @user.errors.full_messages_for(:password_confirmation).first %></p>
+          </div><br />
+          <%= f.submit @submitLabel, :class => "btn btn-large btn-primary" %>
+        <% end %><br />
+      </p>
+        <%= link_to 'Back', user_path %>
+  </div>
+</div>
