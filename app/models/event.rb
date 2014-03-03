@@ -4,6 +4,14 @@ class Event < ActiveRecord::Base
 	validates :description, presence: true, length: {maximum: 255}
 	validates :date, presence: true
 
+	before_save :clean
+
+	def clean
+		self.description = self.description.strip
+		self.url = self.url.strip if self.url
+		self.details = self.details.strip if self.details
+	end
+
 	def self.futur
     	where('date >= ?', Time.now).order('date')
 	end
