@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Reset Password</h2>
+      <p>
+
+        <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+          <!-- Errors on Password ? -->
+          <% if @user.errors.include?(:password) %>
+            <div class="input-group has-error">
+          <% else %>
+            <div class="input-group">
+          <% end %>
+          <%= f.label("New Password") %>
+          <%= f.password_field :password, :class => "form-control" %><p class="text-danger"><%= @user.errors.full_messages_for(:password).first %></p>
+          </div><br />
+          <!-- Errors on Password confirmation ? -->
+          <% if @user.errors.include?(:password_confirmation) %>
+            <div class="input-group has-error">
+          <% else %>
+            <div class="input-group">
+          <% end %>
+          <%= f.label("New Password Confirmation") %>
+          <%= f.password_field :password_confirmation, :class => "form-control" %><p class="text-danger"><%= @user.errors.full_messages_for(:password_confirmation).first %></p>
+          </div><br />
+          <%= f.submit "Update Password", :class => "btn btn-large btn-primary" %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,9 @@
 class EventsController < ApplicationController
   before_action :get_user
-  before_action :set_event, only: [:edit, :update, :destroy]
+  before_action :set_event, only: [:edit, :update, :destroy, :show]
+
+  def show
+  end
 
   def index
     @events = @user.events
@@ -26,7 +29,6 @@ class EventsController < ApplicationController
   end
 
   def update
-    logger.debug "LOGGLOGG update Event " + @event.id.to_s
     if @event.update(event_params)
       @user.events.reload
       redirect_to user_events_path, notice: 'Event was successfully updated.' 
@@ -46,18 +48,16 @@ class EventsController < ApplicationController
       if !signed_in?
         redirect_to(:controller => 'welcome', :action => 'index')
       else
-        logger.debug "LOGGLOGG eventsController user loggé: " + current_user.id.to_s
         @user = current_user
       end
     end
 
     def set_event
-      logger.debug "LOGGLOGG set event " +params[:id]
       @event = @user.events.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:description, :date, :id, :user_id)
+      params.require(:event).permit(:description, :date, :details, :url, :picture, :id, :user_id)
     end
 end

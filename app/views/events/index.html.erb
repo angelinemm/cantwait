@@ -25,9 +25,27 @@
     <div class="col-md-4">
       <h2><%= pluralize((event.date.to_date - DateTime.now.to_date).to_i, "day") %></h2>
       <p>to <%= event.description %> !</p>
+      <!-- Analyse the url and show it -->
+      <% if !event.url.blank?
+        request = Typhoeus::Request.new(event.url, followlocation: true)
+        request.on_complete() do |response|
+          doc = Nokogiri::HTML(response.body)
+          url_title = doc.at('title').inner_html() if !doc.at('title').blank?
+          url_pic = doc.xpath("//meta[@property='og:image']/@content").first.value if !doc.xpath("//meta[@property='og:image']/@content").blank? %>
+          <p>
+            <% if !url_pic.blank? %>
+              <%= image_tag url_pic, :width =>"30" %>&nbsp;
+            <% end %>
+            <%= link_to url_title, event.url %>
+          </p>
+        <% end
+        request.run
+      end %>
+      <p><em><%= event.details.truncate(100, separator: ' ', omission: '...') %></em></p>
       <p>
         <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_user_event_path(event) %>&nbsp;
-        <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, user_event_path(event), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, user_event_path(event), method: :delete, data: { confirm: 'Are you sure?' } %>&nbsp;
+        <%= link_to '<span class="glyphicon glyphicon-eye-open"></span>'.html_safe, user_event_path(event) %>
       </p>
     </div>
     <% if i==3 %>

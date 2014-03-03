@@ -21,6 +21,24 @@
           <%= f.label("Date") %>
           <%= f.date_field :date, :class => "form-control"  %><p class="text-danger"><%= @event.errors.full_messages_for(:date).first %></p>
         </div><br />
+        <!-- Errors on url ? -->
+        <% if @event.errors.include?(:url) %>
+          <div class="input-group has-error">
+        <% else %>
+          <div class="input-group">
+        <% end %>
+          <%= f.label("Lien") %>
+          <%= f.url_field :url, :class => "form-control" %><p class="text-danger"><%= @event.errors.full_messages_for(:url).first %></p>
+        </div><br />          
+        <!-- Errors on details ? -->
+        <% if @event.errors.include?(:details) %>
+          <div class="input-group has-error">
+        <% else %>
+          <div class="input-group">
+        <% end %>
+          <%= f.label("Details") %>
+          <%= f.text_area :details, size: '40x10', :class => "form-control"  %><p class="text-danger"><%= @event.errors.full_messages_for(:details).first %></p>
+        </div><br />        
         <%= f.submit "Create Event", class: "btn btn-large btn-primary" %>
       <% end %><br />
     <%= link_to 'Back', user_events_path %>

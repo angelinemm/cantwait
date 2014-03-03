@@ -1,5 +1,8 @@
 <div class="jumbotron">
   <div class="container">
+  	<% if flash[:alert] %>
+    	<p class='text-danger'><%=h flash[:alert] %></p>
+    <% end %>
     <h1>Can't Wait!</h1>
     <p>Set up the coming events in your life and watch your dashboard as they grow closer. No need to count the days anymore!</p>
     <p>

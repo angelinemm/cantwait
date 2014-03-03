@@ -1,5 +1,6 @@
 CantWait::Application.routes.draw do
 
+  get "password_resets/new"
   root to: 'page#home'
   match '/about', to: 'page#about', via: 'GET', as: 'about'
 
@@ -12,6 +13,8 @@ CantWait::Application.routes.draw do
   end
 
   resources :sessions, only: [:new, :create, :destroy]
+
+  resources :password_resets
 
   get '/user' => 'users#show', as: :show_user
 

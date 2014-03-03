@@ -45,3 +45,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # gem 'debugger', group: [:development, :test]
 
 gem 'rails_12factor', group: :production
+
+gem 'nokogiri', '~> 1.6.1'
+
+gem 'typhoeus'

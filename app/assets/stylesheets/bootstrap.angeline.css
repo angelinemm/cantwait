@@ -58,3 +58,7 @@
     padding-bottom: 15px;
   }
 }
+
+p {
+  word-wrap: break-word;
+}
